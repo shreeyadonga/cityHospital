@@ -1,15 +1,16 @@
 import React from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
+import { NavLink } from 'react-router-dom';
 
 function Appointment(props) {
 
     let schema = yup.object().shape({
-        name: yup.string().required(),
-        email: yup.string().email().required(),
-        phone: yup.string().required(),
-        date: yup.string().required(),
-        message: yup.string().required(),
+        name: yup.string().required('please enter name'),
+        email: yup.string().required('please enter email'),
+        phone: yup.string().required('please enter phone'),
+        date: yup.string().required('please enter date'),
+        message: yup.string().required('please enter message'),
     });
 
 
@@ -24,6 +25,7 @@ function Appointment(props) {
         validationSchema: schema,
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
+
         },
     });
     const { errors, handleSubmit, handleChange, handleBlur, touched } = formikObj;
@@ -31,6 +33,13 @@ function Appointment(props) {
         <div>
             <section id="appointment" className="appointment">
                 <div className="container">
+                    <div className='row'>
+                        <div className='text-center'>
+                            <NavLink exact to={"/Appointment"}>Book Appointment</NavLink>
+                            <NavLink exact to={"/List"}>List Appointment</NavLink>
+                        </div>
+
+                    </div>
                     <div className="section-title">
                         <h2>Make an Appointment</h2>
                         <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
@@ -42,7 +51,8 @@ function Appointment(props) {
                         <Form action method="post" onSubmit={handleSubmit} role="form" className="php-email-form">
                             <div className="row">
                                 <div className="col-md-4 form-group">
-                                    <input type="text"
+                                    <input
+                                        type="text"
                                         name="name"
                                         className="form-control"
                                         id="name"
@@ -56,7 +66,8 @@ function Appointment(props) {
                                 </div>
 
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
-                                    <input type="email"
+                                    <input
+                                        type="text"
                                         className="form-control"
                                         name="email"
                                         id="email"
@@ -70,7 +81,8 @@ function Appointment(props) {
                                 </div>
 
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
-                                    <input type="tel"
+                                    <input
+                                        type="tel"
                                         className="form-control"
                                         name="phone"
                                         id="phone"
@@ -79,14 +91,15 @@ function Appointment(props) {
                                         data-msg="Please enter at least 4 chars"
                                         onChange={handleChange}
                                         onBlur={handleBlur} />
-                                    <p>{errors.phone && touched.phone ? errors.phone : ''}</p> 
+                                    <p>{errors.phone && touched.phone ? errors.phone : ''}</p>
                                     <div className="validate" />
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-md-4 form-group mt-3">
-                                    <input type="datetime"
+                                    <input
+                                        type="datetime"
                                         name="date"
                                         className="form-control datepicker"
                                         id="date"
@@ -95,7 +108,7 @@ function Appointment(props) {
                                         data-msg="Please enter at least 4 chars"
                                         onChange={handleChange}
                                         onBlur={handleBlur} />
-                                    <p>{errors.date && touched.date ? errors.date : ''}</p> 
+                                    <p>{errors.date && touched.date ? errors.date : ''}</p>
                                     <div className="validate" />
                                 </div>
 
@@ -115,7 +128,7 @@ function Appointment(props) {
                                     defaultValue={""}
                                     onChange={handleChange}
                                     onBlur={handleBlur} />
-                                        <p>{errors.message && touched.message ? errors.message : ''}</p> 
+                                <p>{errors.message && touched.message ? errors.message : ''}</p>
                                 <div className="validate" />
                             </div>
 
