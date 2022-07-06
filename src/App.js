@@ -9,8 +9,8 @@ import Doctors from './Container/Doctors/Doctors';
 import Home from './Container/Home';
 import Login from './Container/Login/Login';
 import Medicines from './Container/Medicines/Medicines';
-import Appointment from './Container/Appointment/Appointment';
-
+import Bookapt from './Container/Appointment/Bookapt';
+import Listapt from './Container/Appointment/Listapt';
 
 
 
@@ -19,16 +19,17 @@ function App(props) {
     <div>
       <Header />
       <Switch>
-      <Route  exact path={"/"} component={Home}/>
-      <Route exact path={"/department"} component={Department}/>
-      <Route exact path={"/medicines"} component={Medicines}/>
-      <Route exact path={"/doctors"} component={Doctors}/>
-      <Route exact path={"/about"} component={About}/>
-      <Route exact path={"/contact"} component={Contact}/>
-      <Route exact path={"/login"} component={Login}/>
-      <Route exact path={"/appointment"} component={Appointment}/>
-     </Switch>
-      <Footer/>
+        <Route exact path={"/"} component={Home} />
+        <Route exact path={"/department"} component={Department} />
+        <Route exact path={"/medicines"} component={Medicines} />
+        <Route exact path={"/doctors"} component={Doctors} />
+        <Route exact path={"/about"} component={About} />
+        <Route exact path={"/contact"} component={Contact} />
+        <Route exact path={"/login"} component={Login} />
+        <Route exact path={"/Bookappoinment"} component={Bookapt} />
+        <Route exact path={"/Listappoinment"} component={Listapt} />
+      </Switch>
+      <Footer />
     </div>
   );
 }
