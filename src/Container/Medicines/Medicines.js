@@ -104,12 +104,14 @@ function Medicine(props) {
 
         // console.log(fData);
         localStorage.setItem("Medicines", JSON.stringify(fData));
+        handleClose();
         loadData();
     }
 
     const handleUpdate = (values) => {
 
         const localData = JSON.parse(localStorage.getItem('Medicines'));
+
         let uData = localData.map((l) => {
             if (l.id === values.id) {
                 return values;
@@ -206,7 +208,7 @@ function Medicine(props) {
 
 
     const { errors, handleChange, handleSubmit, handleBlur, touched, values } = formikObj
-    
+
 
     return (
         <div>
@@ -321,11 +323,6 @@ function Medicine(props) {
             </Dialog>
 
         </div>
-
-        // <div>
-        //     {/* <List data={orgData}/>
-        //     <NavLink to={"/ref"}>Use ref</NavLink> */}
-        // </div>
     );
 }
 

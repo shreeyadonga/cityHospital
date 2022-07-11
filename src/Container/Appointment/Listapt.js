@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import { Card, CardBody, CardTitle, CardText, CardSubtitle, Button } from "reactstrap";
 
 function Listapt(props) {
 
+    const history = useHistory();
+
     const localdata = JSON.parse(localStorage.getItem("apt"));
+
     const [data, setdata] = useState([])
 
     useEffect(() => {
@@ -13,15 +17,43 @@ function Listapt(props) {
 
     const getdata = () => {
         const localdata = JSON.parse(localStorage.getItem('apt'));
-        console.log(localdata);
+
         setdata(localdata);
 
     }
-    console.log(data);
+
+    const handleEdit = (id) => {
+
+        history.push("/Bookappoinment", { id: id })
+    }
+
+
+    const handleDelete = (id) => {
+
+        let localData = JSON.parse(localStorage.getItem('apt'));
+
+        let fData = localData.filter((l) => l.id !== id)
+
+        localStorage.setItem("apt", JSON.stringify(fData));
+
+        getdata();
+    }
 
     return (
 
         <section className='my-4'>
+
+            <div className='container'>
+                <div className='row text-center'>
+                    <div className='col-6'>
+                        <NavLink exact to={"/Bookappoinment"}>Book appointment</NavLink>
+                    </div>
+                    <div className='col-6'>
+                        <NavLink exact to={"/Listappoinment"}>List appointment</NavLink>
+                    </div>
+                </div>
+            </div>
+
             <div className='container'>
                 <div className="section-title">
                     <h2>Make an Appointment</h2>
@@ -47,10 +79,10 @@ function Listapt(props) {
                                         <CardText>
                                             {d.date}
                                         </CardText>
-                                        <Button className='shadow-none mx-2 border-2'>
+                                        <Button className='shadow-none mx-2 border-2' onClick={() => { handleEdit(d.id) }}>
                                             Edit
                                         </Button>
-                                        <Button id="btn" className='shadow-none mx-2 border-2'>
+                                        <Button id="btn" className='shadow-none mx-2 border-2' onClick={() => { handleDelete(d.id) }}>
                                             Delete
                                         </Button>
                                     </CardBody>
