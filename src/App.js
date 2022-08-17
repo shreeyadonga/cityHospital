@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Footer from './Container/Footer/Footer';
 import Header from './Container/Header/Header';
 import About from './Container/About/About';
@@ -11,7 +11,8 @@ import Login from './Container/Login/Login';
 import Medicines from './Container/Medicines/Medicines';
 import Bookapt from './Container/Appointment/Bookapt';
 import Listapt from './Container/Appointment/Listapt';
-
+// import PrivetRoot from './Container/Root/PrivetRoot';
+import PublicRoot from './Container/Root/PublicRoot';
 
 
 function App(props) {
@@ -19,15 +20,15 @@ function App(props) {
     <div>
       <Header />
       <Switch>
-        <Route exact path={"/"} component={Home} />
-        <Route exact path={"/department"} component={Department} />
-        <Route exact path={"/medicines"} component={Medicines} />
-        <Route exact path={"/doctors"} component={Doctors} />
-        <Route exact path={"/about"} component={About} />
-        <Route exact path={"/contact"} component={Contact} />
-        <Route exact path={"/login"} component={Login} />
-        <Route exact path={"/Bookappoinment"} component={Bookapt} />
-        <Route exact path={"/Listappoinment"} component={Listapt} />
+        <PublicRoot exact path={"/"} component={Home} />
+        <PublicRoot exact path={"/department"} component={Department} />
+        <PublicRoot exact path={"/medicines"} component={Medicines} />
+        <PublicRoot exact path={"/doctors"} component={Doctors} />
+        <PublicRoot exact path={"/about"} component={About} />
+        <PublicRoot exact path={"/contact"} component={Contact} />
+        <PublicRoot exact path={"/login"} restricted={true} component={Login} />
+        <PublicRoot exact path={"/Bookappoinment"} component={Bookapt} />
+        <PublicRoot exact path={"/Listappoinment"} component={Listapt} />
       </Switch>
       <Footer />
     </div>

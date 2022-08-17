@@ -1,4 +1,4 @@
-import React from 'react';  
+import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -85,7 +85,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function Layout ({children}) {
+export default function Layout({ children }) {
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -98,9 +98,9 @@ export default function Layout ({children}) {
     setOpen(false);
   };
 
- const listData=[
-  {lable:'Medicines', to:'/medicines' , icon:<LocalHospitalIcon/>},
-  {lable:'Patients', to:'/patients' , icon:<PersonIcon/>},
+  const listData = [
+    { lable: 'Medicines', to: '/medicines', icon: <LocalHospitalIcon /> },
+    { lable: 'Patients', to: '/patients', icon: <PersonIcon /> },
   ]
   return (
     <Box sx={{ display: 'flex' }}>
@@ -127,13 +127,13 @@ export default function Layout ({children}) {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <LocalHospitalIcon/> : <PersonIcon/>}
+            {theme.direction === 'rtl' ? <LocalHospitalIcon /> : <PersonIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          { listData.map((text, index) => (
-            <ListItem  exact component={NavLink} to={text.to} key={text.lable} disablePadding sx={{ display: 'block' }}>
+          {listData.map((text, index) => (
+            <ListItem exact component={NavLink} to={text.to} key={text.lable} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -155,8 +155,8 @@ export default function Layout ({children}) {
             </ListItem>
           ))}
         </List>
-       
-        
+
+
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

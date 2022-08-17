@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
+import { isLogin } from '../../Utilites/Index';
 
 function Login(props) {
 
@@ -10,35 +11,35 @@ function Login(props) {
   let schemaVal, initVal;
 
   if (usertype === 'login') {
-     schemaVal = {
-      email: yup.string().email("please enter email id."),
-      password: yup.string().required("please enter password."),
-    };
-
-    initVal={
-      email:'',
-      password:'',
-    }
-
-  }else if (usertype === 'signup'){
-      schemaVal = {
-      name: yup.string().required("please enter name."),
-      email: yup.string().email().required("please enter email id"),
-      password: yup.string().required("please enter password."),
-    
-    };
-    initVal={
-      name:'',
-      email:'',
-      password:'',
-    }
-  }else if(reset === true){
     schemaVal = {
-      email: yup.string().email().required("please enter email id"),
+      email: yup.string().required("please enter email id."),
+      password: yup.string().required("please enter password."),
     };
 
-    initVal={
-    email:'',
+    initVal = {
+      email: '',
+      password: '',
+    }
+
+  } else if (usertype === 'signup') {
+    schemaVal = {
+      name: yup.string().required("please enter name."),
+      email: yup.string().required("please enter email id"),
+      password: yup.string().required("please enter password."),
+
+    };
+    initVal = {
+      name: '',
+      email: '',
+      password: '',
+    }
+  } else if (reset === true) {
+    schemaVal = {
+      email: yup.string().required("please enter email id"),
+    };
+
+    initVal = {
+      email: '',
     }
   }
 
@@ -46,10 +47,14 @@ function Login(props) {
 
 
   const formikObj = useFormik({
-    initialValues:initVal ,
+    initialValues: initVal,
     validationSchema: schema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      if (usertype === "Log in") {
+        isLogin()
+      } else {
+        alert(JSON.stringify(values, null, 2));
+      }
     },
   });
   const { errors, handleSubmit, handleChange, handleBlur, touched } = formikObj;
@@ -93,7 +98,8 @@ function Login(props) {
 
               <div className="row">
                 <div className="col-md-4 form-group mt-3 mt-md-0">
-                  <input type="email"
+                  <input
+                    type="text"
                     className="form-control "
                     name="email"
                     id="email"
